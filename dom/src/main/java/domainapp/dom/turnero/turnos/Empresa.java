@@ -20,6 +20,14 @@ public class Empresa {
 	private String cuil;
 	private String nombre;
 	private Blob logo;
+	private String direccion;
+	@javax.jdo.annotations.Column(allowsNull="false")
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 	@PrimaryKey
     @javax.jdo.annotations.Column(allowsNull="false", length = 40)
     @Property(
@@ -48,6 +56,6 @@ public class Empresa {
 	
 	
     public TranslatableString title() {
-        return TranslatableString.tr("Object: {name}", "name", this.getNombre());
+        return TranslatableString.tr("{name}", "name", this.getNombre());
     }
 }

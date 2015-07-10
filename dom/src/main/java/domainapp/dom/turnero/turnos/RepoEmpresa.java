@@ -34,22 +34,27 @@ public class RepoEmpresa {
     
     
     @MemberOrder(sequence = "1")
-    public Empresa crearNuevaEmpresa(
+    public TurnoSecuencial crearNuevaEmpresa(
             final @ParameterLayout(named="cuil") String cuil,
             final @ParameterLayout(named="Nombre") String nombre,
-            final @ParameterLayout(named="Logo") Blob logo
+            final @ParameterLayout(named="Logo") Blob logo,
+            final @ParameterLayout(named="Direccion") String direccion
             ) {
         final Empresa obj = container.newTransientInstance(Empresa.class);
         obj.setCuil(cuil);
         obj.setLogo(logo);
         obj.setNombre(nombre);
-        container.persistIfNotAlready(obj);
-        return obj;
+        obj.setDireccion(direccion);
+        container.persistIfNotAlready(obj);        
+        final TurnoSecuencial objetoTurno = container.newTransientInstance(TurnoSecuencial.class);
+        objetoTurno.setEmpresa(obj);
+        objetoTurno.setNumeroDeTurno(0);
+        container.persistIfNotAlready(objetoTurno);
+        return objetoTurno;
     }
 
     
     
     @javax.inject.Inject
-    @SuppressWarnings("unused")
     private DomainObjectContainer container;
 }

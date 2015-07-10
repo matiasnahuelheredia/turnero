@@ -27,7 +27,32 @@ public class TurnoSecuencial {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+	
+	
+	public TurnoSecuencial up()
+	{
+		this.setNumeroDeTurno(this.numeroDeTurno +1);
+		return this;
+	}
+	
+	public TurnoSecuencial down()
+	{
+		if (this.numeroDeTurno!=0)
+		{
+		this.setNumeroDeTurno(this.numeroDeTurno-1);
+		}
+		return this;
+	}
+	
+	public TurnoSecuencial reiniciarTurnero()
+	{
+		if (this.numeroDeTurno!=0)
+		{
+			this.setNumeroDeTurno(0);
+		}
+		return this;
+	}
     public TranslatableString title() {
-        return TranslatableString.tr("Object: {name}", "name", this.getNumeroDeTurno());
+        return TranslatableString.tr("{name}", "name", this.getNumeroDeTurno());
     }
 }
